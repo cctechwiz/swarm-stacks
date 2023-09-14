@@ -1,8 +1,5 @@
 version: '3'
 
-networks:
-  backbone:
-    external: true
 services:
   traefik:
     image: traefik:v2.10.4
@@ -14,6 +11,18 @@ services:
     volumes:
       - ./config:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NAMECHEAP_API_USER=cctechwiz
+      - NAMECHEAP_API_KEY_FILE=/run/secrets/namecheap_api_key
     networks:
       - backbone
     restart: unless-stopped
+
+networks:
+  backbone:
+    external: true
+
+
+secrets:
+  namecheap_api_key:
+    external: true
