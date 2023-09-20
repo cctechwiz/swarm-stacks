@@ -1,12 +1,11 @@
 ---
 services:
-  uptimekuma:
+  uptime-kuma:
     image: louislam/uptime-kuma:latest
-    container_name: uptime-kuma
     ports:
       - 3001:3001
     volumes:
-      - uptimekuma-data:/app/data
+      - uptime-kuma-data:/app/data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.uptime-kuma.rule=Host(`status.local.cctechwiz.com`)"
@@ -15,5 +14,5 @@ services:
       - "traefik.http.routers.uptime-kuma.tls.certresolver=staging"
 
 volumes:
-  uptimekuma-data:
+  uptime-kuma-data:
     driver: local
