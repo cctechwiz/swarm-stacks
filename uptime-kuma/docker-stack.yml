@@ -10,10 +10,14 @@ services:
       - backbone
     labels:
       - traefik.enable=true
-      - traefik.http.routers.uptime-kuma.rule=Host(`status.cosmere.cctechwiz.com`)
-      - traefik.http.routers.uptime-kuma.entrypoints=websecure
-      - traefik.http.routers.uptime-kuma.tls=true
-      - traefik.http.routers.uptime-kuma.tls.certresolver=staging
+      - traefik.docker.network=backbone
+      - traefik.http.routers.uptime-kuma-http.rule=Host(`status.cosmere.cctechwiz.com`)
+      - traefik.http.routers.uptime-kuma-http.entrypoints=web
+      - traefik.http.routers.uptime-kuma-http.middlewares=https-redirect
+      - traefik.http.routers.uptime-kuma-https.rule=Host(`status.cosmere.cctechwiz.com`)
+      - traefik.http.routers.uptime-kuma-https.entrypoints=websecure
+      - traefik.http.routers.uptime-kuma-https.tls=true
+      - traefik.http.routers.uptime-kuma-https.tls.certresolver=staging
 
 networks:
   backbone:
