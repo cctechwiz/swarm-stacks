@@ -21,6 +21,11 @@ services:
       - traefik.http.middlewares.n8n.headers.STSPreload=true
       - traefik.http.routers.n8n.middlewares=n8n@docker
     environment:
+      - DOMAIN_NAME=cosmere.cctechwiz.com
+      - SUBDOMAIN=n8n
+      - GENERIC_TIMEZONE=America/Denver
+      - SSL_EMAIL=cctechwiz@gmail.com
+      - N8N_SECURE_COOKIE=false
       - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
